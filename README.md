@@ -36,6 +36,7 @@
 		* [1.1.3 JS 压缩和混乱](#113-js-压缩和混乱)
 		* [1.1.4 文件合并](#114-文件合并)
 		* [1.1.5 开启 gzip](#115-开启-gzip)
+	* [1.2 图片压缩](#12-图片压缩)
 * [2. 进阶优化](#2-进阶优化)
 * [3. 综合服务端的优化](#3-综合服务端的优化)
 
@@ -54,19 +55,7 @@ HTTP请求的过程及潜在的性能优化点：
 
 ### 1.1 资源的合并与压缩-HTTP请求的过程及潜在的性能优化点
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 node-minify：[官网](https://node-minify.2clics.net) | [Github](https://github.com/srod/node-minify)
-=======
-node-minify：(官网)(https://node-minify.2clics.net) | (Github)(https://github.com/srod/node-minify)
->>>>>>> bfb7b52... http请求过程中的优化
-=======
-node-minify：[官网](https://node-minify.2clics.net) | [Github](https://github.com/srod/node-minify)
->>>>>>> f841a0c... http请求过程中的优化
-=======
-node-minify：(官网)(https://node-minify.2clics.net) | (Github)(https://github.com/srod/node-minify)
->>>>>>> bfb7b52... http请求过程中的优化
 
 HTTP请求的过程性能优化的原则：
 
@@ -80,19 +69,7 @@ HTTP请求的过程性能优化的原则：
 HTML 压缩方法：
 
 * 使用在线网站进行压缩（很少使用）
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 * nodejs 中的 [html-minifier](https://node-minify.2clics.net/compressors/html-minifier.html) 工具
-=======
-* nodejs 中的 (html-minifier)(https://node-minify.2clics.net/compressors/html-minifier.html) 工具
->>>>>>> bfb7b52... http请求过程中的优化
-=======
-* nodejs 中的 [html-minifier](https://node-minify.2clics.net/compressors/html-minifier.html) 工具
->>>>>>> f841a0c... http请求过程中的优化
-=======
-* nodejs 中的 (html-minifier)(https://node-minify.2clics.net/compressors/html-minifier.html) 工具
->>>>>>> bfb7b52... http请求过程中的优化
 * 后端模板引擎渲染压缩
 
 #### 1.1.2 CSS 压缩
@@ -102,23 +79,8 @@ HTML 压缩方法：
 CSS 压缩方法：
 
 * 使用在线网站进行压缩（很少使用）
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 * 对 HTML 中的 CSS 使用 [html-minifier](https://node-minify.2clics.net/compressors/html-minifier.html) 进行压缩
 * 使用 [clean-css](https://github.com/jakubpawlowicz/clean-css) 进行压缩
-=======
-* 对 HTML 中的 CSS 使用 (html-minifier)(https://node-minify.2clics.net/compressors/html-minifier.html) 进行压缩
-* 使用 (clean-css)(https://github.com/jakubpawlowicz/clean-css) 进行压缩
->>>>>>> bfb7b52... http请求过程中的优化
-=======
-* 对 HTML 中的 CSS 使用 [html-minifier](https://node-minify.2clics.net/compressors/html-minifier.html) 进行压缩
-* 使用 [clean-css](https://github.com/jakubpawlowicz/clean-css) 进行压缩
->>>>>>> f841a0c... http请求过程中的优化
-=======
-* 对 HTML 中的 CSS 使用 (html-minifier)(https://node-minify.2clics.net/compressors/html-minifier.html) 进行压缩
-* 使用 (clean-css)(https://github.com/jakubpawlowicz/clean-css) 进行压缩
->>>>>>> bfb7b52... http请求过程中的优化
 
 #### 1.1.3 JS 压缩和混乱
 
@@ -127,23 +89,8 @@ CSS 压缩方法：
 JS 压缩和混乱方法：
 
 * 使用在线网站进行压缩（很少使用）
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 * 对 HTML 中的 JS 使用 [html-minifier](https://node-minify.2clics.net/compressors/html-minifier.html) 进行压缩
 * 使用 [uglifyjs2](http://lisperator.net/uglifyjs/) 进行压缩
-=======
-* 对 HTML 中的 JS 使用 (html-minifier)(https://node-minify.2clics.net/compressors/html-minifier.html) 进行压缩
-* 使用 (uglifyjs2)(http://lisperator.net/uglifyjs/) 进行压缩
->>>>>>> bfb7b52... http请求过程中的优化
-=======
-* 对 HTML 中的 JS 使用 [html-minifier](https://node-minify.2clics.net/compressors/html-minifier.html) 进行压缩
-* 使用 [uglifyjs2](http://lisperator.net/uglifyjs/) 进行压缩
->>>>>>> f841a0c... http请求过程中的优化
-=======
-* 对 HTML 中的 JS 使用 (html-minifier)(https://node-minify.2clics.net/compressors/html-minifier.html) 进行压缩
-* 使用 (uglifyjs2)(http://lisperator.net/uglifyjs/) 进行压缩
->>>>>>> bfb7b52... http请求过程中的优化
 
 #### 1.1.4 文件合并
 
@@ -171,7 +118,35 @@ JS 压缩和混乱方法：
 
 #### 1.1.5 开启 gzip
 
+### 1.2 图片压缩
+
+**图片压缩**：针对真实图片情况，舍弃一些相对无关紧要的色彩信息。
+
+[tinypng - 图片压缩](https://tinypng.com) |
+[智图 - 图片格式转换](https://zhitu.isux.us) |
+[spritecow - 雪碧图制作](http://www.spritecow.com)
+
+png8/png24/png32 之间的区别：
+
+* png8 - 256色，支持透明
+* png24 - 2^24色，不支持透明
+* png32 - 2^24色，支持透明
+
+不同格式图片的区别：
+
+* [jpg](https://zh.wikipedia.org/wiki/JPEG) - 有损压缩，压缩率高，不支持透明（不需要透明图片的业务场景）
+* [png](https://zh.wikipedia.org/wiki/PNG) - 支持透明，浏览器兼容性好（需要透明图片的业务场景）
+* [webp](https://zh.wikipedia.org/wiki/WebP) - 压缩程度好，在 ios webview 有兼容性问题（安卓广泛使用）
+* [SVG 矢量图](https://developer.mozilla.org/zh-CN/docs/Web/SVG) - 代码内嵌，相对较小（图片样式简单）
+* [gif](https://zh.wikipedia.org/wiki/GIF) - 动图，不可取代（动图）
+
+图片压缩方法：
+
+* [CSS 雪碧图](https://zh.wikipedia.org/wiki/%E7%B2%BE%E7%81%B5%E5%9B%BE)：优点-减少 HTTP 请求数量，缺点-图片较大，页面上有较多的图片信息依赖于一张图的加载。（较少使用）
+* Image inline：将图片内容内嵌到 HTML 上，减少 HTTP 强求的数量。如使用矢量图 SVG 进行简单图片的绘制，使用 confont 解决 icon 问题。（一个 [iconfont](https://www.iconfont.cn) 图标网站）
+
 ## 2. 进阶优化
+
 
 ## 3. 综合服务端的优化
 
