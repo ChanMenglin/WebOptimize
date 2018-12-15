@@ -39,6 +39,7 @@
 	* [1.2 图片压缩](#12-图片压缩)
 * [2. 进阶优化](#2-进阶优化)
 	* [2.1 CSS、JS 的加载与执行](#21-cssjs-的加载与执行)
+	* [2.2 懒加载和预加载](#22-懒加载和预加载)
 * [3. 综合服务端的优化](#3-综合服务端的优化)
 
 
@@ -170,7 +171,54 @@ HTML 渲染过程的特点：
 * 依赖关系
 * 引入方式
 
+### 2.2 懒加载和预加载
+
+[懒加载和预加载 - 掘金](https://juejin.im/post/5b0c3b53f265da09253cbed0) | [懒加载和预加载 - 简书](https://www.jianshu.com/p/4876a4fe7731)
+
+**懒加载**：在所需资源（多为图片）进入可视区域后再请求资源，可减少无效资源的加载，避免并发请求资源过多导致的阻塞问题。适用于图片较多、页面较长的业务场景。
+
+懒加载库：[jquery_lazyload](https://github.com/tuupola/jquery_lazyload)
+
+[Javascript图片预加载详解](http://web.jobbole.com/86785/)
+
+```html
+<!-- 前台需要懒加载的图片标签（一定要有 height属性） -->
+<img src='' class='image-item' lazyload='true' data-original='图片的URL地址' height='10px' />
+```
+
+```js
+// 可视区域的高度
+var viewHeight = document.documentElement.clientHeight;
+
+// 懒加载方法
+function lazyLoad() {
+    var eles = document.querySelectorAll('img[data-original][lazyload]');
+    Array.prototype.forEach.call(eles, function(item, index) {
+        var rect;
+        if( item.dataset.original === '' )
+            return;
+        rect = item.getBoundimgClientRect();
+
+        if( rect.bottom >= 0 && rect.top < viewHeight ) {
+            !function() {
+                var img = new Image();
+                mg.src = item.dataset.original;
+                img.onload = function() {
+                    item.src = img.src;
+                }
+                item.removeAttribute('data-original');
+                item.removeAttribute('lazyload')
+            }
+        }
+    })
+}
+
+lazyLoad();// 加载时先调用一次，显示第一屏的图片
+document.addElementListener('scroll', lazyload);
+```
+
+**预加载**：对图片等静态资源使用之前提前请求，资源使用时可从缓存中加载，提升用户体验。
+
+预加载库：[preloadjs](https://www.createjs.com/preloadjs)
+
 ## 3. 综合服务端的优化
-
-
-
