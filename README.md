@@ -224,7 +224,7 @@ document.addElementListener('scroll', lazyload);
 
 ### 2.3 重绘与回流
 
-频繁触发重绘与回流，会导致 UI 频繁渲染，从而导致 JS 变慢，这就是 CSS 性能让 JavaScript 变慢的原因。
+频繁触发重绘与回流，会导致 UI 频繁渲染，从而导致 JS 变慢，这就是 CSS 性能让 JavaScript 变慢的原因。
 
 **回流**：当 render-tree 中的一部分（或全部）因为元素的规模尺寸、布局、显示隐藏等改变而需要重新构建时称为回流。当页面布局和几何属性发生变化时就需要回流。
 
@@ -234,15 +234,11 @@ document.addElementListener('scroll', lazyload);
 
 触发页面重布局的属性：
 
-*
-*
-*
-
 | [盒子模型](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model)相关属性 | 定位属性及浮动 |  改变节点内部文字结构的属性 |
 | :-----------: | :-------------------: | :-------------------: |
 | [width](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/width) / [height](https://developer.mozilla.org/zh-CN/docs/Web/CSS/height)	| [top](https://developer.mozilla.org/zh-CN/docs/Web/CSS/top) / [bottom](https://developer.mozilla.org/zh-CN/docs/Web/CSS/bottom) / [left](https://developer.mozilla.org/zh-CN/docs/Web/CSS/left) / [right](https://developer.mozilla.org/zh-CN/docs/Web/CSS/right) | [text-align](https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-align)			|
 | [padding](https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding) / [margin](https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin) | [position](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position) | [overflow](https://developer.mozilla.org/zh-CN/docs/Web/CSS/overflow) / [overflow-y](https://developer.mozilla.org/zh-CN/docs/Web/CSS/overflow-y) |
-| [display](https://developer.mozilla.org/zh-CN/docs/Web/CSS/display) | [float](https://developer.mozilla.org/zh-CN/docs/CSS/float) | [font 相关属性](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Fonts) |
+| [display](https://developer.mozilla.org/zh-CN/docs/Web/CSS/display) | [float](https://developer.mozilla.org/zh-CN/docs/CSS/float) | [font 相关属性](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Fonts) |
 | [border 相关属性](https://developer.mozilla.org/zh-CN/docs/Web/CSS/border) | [clear](https://developer.mozilla.org/zh-CN/docs/Web/CSS/clear) | [line-height](https://developer.mozilla.org/zh-CN/docs/Web/CSS/line-height) |
 | [min-height](https://developer.mozilla.org/zh-CN/docs/Web/CSS/min-height) |						| [vertical-align](https://developer.mozilla.org/zh-CN/docs/Web/CSS/vertical-align) |
 | 				| 						| [white-space](https://developer.mozilla.org/zh-CN/docs/Web/CSS/white-space) |
@@ -253,7 +249,7 @@ document.addElementListener('scroll', lazyload);
 
 1. 3D 或透视变换（perspective transform）CSS 属性
 2. 使用加速视频解码的 `<video>` 节点
-3. 拥有 3D（WebGL）上下文或加速的 2D 上下文的 `<canvas>` 节点
+3. 拥有 3D（WebGL）上下文或加速的 2D 上下文的 `<canvas>` 节点
 4. 混合插件（如 flash）
 5. 对自己的 opacity 做 CSS 动画或使用一个动画 webkit 变换的元素
 6. 拥有加速 CSS 过滤器的元素
@@ -265,8 +261,8 @@ document.addElementListener('scroll', lazyload);
 1. 用 translate 替代 top
 2. 用 opacity 替代 visibility
 3. 不要频繁的修改元素的单个样式，使用 className 整体修改
-4. 把 DOM 离线后修改（如先把 DOM 隐藏（display=none,一次 Reflow）然后修改，完成后再显示）
-5. 不要把 DOM 节点的属性值放在一个循环里当成循环的变量
+4. 把 DOM 离线后修改（如先把 DOM 隐藏（display=none,一次 Reflow）然后修改，完成后再显示）
+5. 不要把 DOM 节点的属性值放在一个循环里当成循环的变量
 6. 不要使用 table 布局（一个很小的改动会造成整个 table 的重新布局）
 7. 动画实现的速度的选择
 8. 对于动画新建图层（添加 [will-change](https://developer.mozilla.org/zh-CN/docs/Web/CSS/will-change)=transform 或 transform=translateZ(0) 属性）
