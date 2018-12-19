@@ -277,7 +277,7 @@ document.addElementListener('scroll', lazyload);
 
 ### 2.4 浏览器存储
 
-#### 2.4.1 [Cookies](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies) 优化
+#### 2.4.1 [Cookies](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies)
 
 cookies 会造成同一域名下 cdn 的流量损耗。解决办法：cdn 的域名与主站域名分开，这样在请求 cdn 静态文件时就不会发送 cookie。
 
