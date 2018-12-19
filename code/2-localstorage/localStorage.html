@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Web 优化-localStorage</title>
+	</head>
+	<body>
+		<script type='text/javascript'>
+
+			/**
+			 * 用法一：维护用户数据
+			*/
+
+			// 由于兼容性问题，需要在使用 localStorage 前做一个判断
+			if (window.localStorage) {
+				// 写入 localStorage
+				localStorage.setItem('userName', 'jack');
+
+				// 读取 localStorage
+				console.log('localStorage:' + localStorage.getItem('userName'))
+			}
+
+			/**
+			 * 用法二：存储静态资源
+			*/
+			var testJSContent = localStorage.getItem('test');
+			if (testJSContent) {
+				eval(testJSContent); // 执行 js
+			} else {
+				// 使用 http 请求下载 js，并存入 localStorage
+				var xmlHttpRequest = new XMLHttpRequest();
+				xmlHttpRequest.onreadystatechange = callback;
+				xmlHttpRequest.onprogress = progressCallback;
+				xmlHttpRequest.open('GET', './test.js', true);
+				xmlHttpRequest.send();
+
+			}
+
+			function callback () {
+				if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+					var responseTest = xmlHttpRequest.responseText;
+					eval(responseTest); // 执行 js
+					localStorage.setItem('test', responseTest)
+				} else {
+					console.log('Request was unsuccessfull:' + xmlHttpRequest);
+				}
+			}
+
+			function progressCallback (e) {
+				e = e || event;
+				if (e.lengthComputable) {
+					console.log('Recetived' + e.loaded + 'of' + e.total)
+				}
+			}
+
+		</script>
+	</body>
+</html>

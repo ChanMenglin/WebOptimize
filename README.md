@@ -41,6 +41,13 @@
 	* [2.1 CSS、JS 的加载与执行](#21-cssjs-的加载与执行)
 	* [2.2 懒加载和预加载](#22-懒加载和预加载)
 	* [2.3 重绘与回流](#23-重绘与回流)
+	* [2.4 浏览器存储](#24-浏览器存储)
+		* [2.4.1 Cookies](#241-cookies)
+		* [2.4.2 [localStorage]](#242-localstorage)
+		* [2.4.3 [sessionStorage]](#243-sessionstorage)
+		* [2.4.4 [IndexedDB]](#244-indexeddb)
+		* [2.4.5 [service worker]](#245-service-worker)
+
 * [3. 综合服务端的优化](#3-综合服务端的优化)
 
 
@@ -277,6 +284,8 @@ cookies 会造成同一域名下 cdn 的流量损耗。解决办法：cdn 的域
 > 有关 Cookies 的更详细的信息可查看我的另外一个库：  https://github.com/ChanMenglin/WebSecurity#3-前端-cookies-安全性
 （这个仓库以 Web 安全为主，但较详细的介绍了 Cookies）
 
+[cookie 操作](code/1-cookie/cookie.html)
+
 ```JavaScript
 // cookie 操作
 
@@ -287,7 +296,7 @@ document.cookie = 'token=token'
 document.cookie // token=token
 ```
 
-#### 2.4.2 [localstorage](https://developer.mozilla.org/zh-CN/docs/Web/API/Storage/LocalStorage)
+#### 2.4.2 [localStorage](https://developer.mozilla.org/zh-CN/docs/Web/API/Storage/localStorage)
 
 * HTML5 中用于浏览器本地缓存方案
 * 不会过期
@@ -296,16 +305,18 @@ document.cookie // token=token
 * 接口封装较好
 * 经典用例：维护用户态（由于 HTTP 请求的无状态）
 
+[localStorage 操作](code/2-localstorage/localStorage.html)
+
 ```JavaScript
-// localstorage 操作
+// localStorage 操作
 
-// 由于兼容性问题，需要在使用 localstorage 前做一个判断
-if (window.localstorage) {
-    // 写入 localstorage
-    localstorage.serItem('userName': 'jack');
+// 由于兼容性问题，需要在使用 localStorage 前做一个判断
+if (window.localStorage) {
+    // 写入 localStorage
+    localStorage.setItem('userName', 'jack');
 
-    // 读取 localstorage
-    localstorage.getItem('userName')
+    // 读取 localStorage
+    localStorage.getItem('userName')
 }
 ```
 
@@ -338,96 +349,19 @@ if (window.sessionStorage) {
 * 弥补 sessionStorage 对存储更大量结构化数据的存储瓶颈
 * 经典用例：为应用创建离线版本
 
-```javaScript
-// 操作 IndexedDB
-
-function openDB(name, callback) {
-    // 建立并打开 IndexedDB
-    var require = window.indexedDB.open(name);
-    require.onerror = function (e) {
-        console.log('open indexedDB error');
-    }
-    require.onsuccess = function (e) {
-        var myDB.db = e.target.result;
-        callback && callback();
-    }
-
-    // 创建主键
-    request.onupgrandeneeded = function () {
-        var store = request.result.createObjectStore('books', {
-            keyPath: 'isbn'
-        })
-    }
-
-    // 添加字段
-    var titleIndex = store.createIndex('by_title', 'title', unique: true)
-    var authorIndex = store.createIndex('by_author', 'author', unique: true)
-
-    // 添加数据
-    store.put({
-        title: 'title_1',
-        author: 'author_1',
-        isbn: 123456
-    })
-}
-
-var myDB = {
-    name: 'testDB',
-    version: 1,
-    db: null,
-}
-
-
-function addData(db, storeName) {
-    // 创建事物
-    var transaction = db.transaction('books', 'readwrite')
-    var store = transaction.objectStore('books')
-
-    // 读取数据
-    var request = store.get(123456)
-    request.onsuccess = function (e) {
-        console.log(e.target.result)
-    }
-
-    // 添加数据
-    store.add({...})
-
-    // 更新数据
-    store.get(123456).onsuccess (e) {
-        var book = e.target.result
-        book.author = 'up data'
-        sore.put(book)
-
-    }
-
-    // 删除数据
-    store.delete(123456)
-}
-
-openDB(myDB.name, function () {
-    // 删除 IndexedDB
-    // myBD.db.close()
-    // window.indexedDB.deleteDatabase(myDB.db)
-})
-// objectStore 不同于数据库的表
-```
+[使用 IndexedDB](https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB)
 
 #### 2.4.5 [service worker](https://developer.mozilla.org/zh-CN/docs/Web/API/Service_Worker_API)
 
-* service workers 是一个脚本，浏览器独立于当前网页，后台运行，实现一些不依赖页面或者用户交互的特性
+* service worker 是一个脚本，浏览器独立于当前网页，后台运行，实现一些不依赖页面或者用户交互的特性
 * 使用场景：拦截和处理网络请求，包括以编程方式来管理被缓存的相应、推送消息、后台同步、geofericing（地图围栏定位）
+* service worker 只能在 https 协议下使用（localhost 也可以使用）
 
 > chrome 中查看 service worker：
 > 1. chrome://serviceworker-internals/
 > 2. chrome://version/#inspect/#service-workers
 
-```javaScript
-if (navigator.serviceWorker) {
-    navigator.serviceWorker.register('', {scope: './'})
-    .when(function (reg) {
-
-    })
-}
-```
+[service worker - 离线应用](code/4-ServiceWorker/ServiceWorker.html) |
+[service worker - 消息推送](code/4-ServiceWorker/msg-dome.html)
 
 ## 3. 综合服务端的优化
