@@ -11,5 +11,5 @@ self.addEventListener('message', function (e) {
 		})
 	})
 
-	= e.waitUntil()
+	e.waitUntil(promiss)
 })

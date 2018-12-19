@@ -2,6 +2,8 @@ if (navigator.serviceWorker) {
 	var sendButton = document.getElementById('send-msg-button');
 	var msg = document.getElementById('msg-import');
 
+	// 解决 navigator.serviceWorker.controller 为空的问题
+	// https://github.com/w3c/ServiceWorker/issues/799
 	navigator.serviceWorker.ready.then(() => {
 		// I thought the page would be controlled at this point, thanks to clients.claim()
 		console.log('.ready resolved, and navigator.serviceWorker.controller is', navigator.serviceWorker.controller);
