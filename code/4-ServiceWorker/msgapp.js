@@ -12,7 +12,7 @@ if (navigator.serviceWorker) {
 		msgBox.innerHTML += ('<li>'+ e.data.message +'</li>')
 	})
 
-	navigator.serviceWorker.register('./service-worker.js', {scope: './'})
+	navigator.serviceWorker.register('./msg-sw.js', {scope: './'})
 		.then( function (reg) {
 			console.log(reg)
 		})

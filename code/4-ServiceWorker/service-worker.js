@@ -21,5 +21,5 @@ self.addEventListener('fetch', function (e) {
 				// 通过 fetch 方法向网络发请求
 			}
 		})
-	)
+	);
 })
