@@ -362,6 +362,6 @@ if (window.sessionStorage) {
 > 2. chrome://version/#inspect/#service-workers
 
 [service worker - 离线应用](code/4-ServiceWorker/ServiceWorker.html) |
-[service worker - 消息推送](code/4-ServiceWorker/msg-dome.html)
+[service worker - 消息推送](code/4-ServiceWorker/msgdome.html)
 
 ## 3. 综合服务端的优化
