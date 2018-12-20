@@ -51,8 +51,8 @@
 		* [2.5.1 HTTP Headers](#251-http-headers)
 			* [2.5.1.1 缓存策略控制 - cache-control](#2511-缓存策略控制---cache-control)
 			* [2.5.1.2 设置缓存过期时间 - Expires](#2512-设置缓存过期时间---expires)
-			* [2.5.1.3 基于客户端和服务端协商的缓存机制 - Last-modified](#2513-基于客户端和服务端协商的缓存机制---last-modified)
-			* [2.5.1.4 基于文件 hash 值校验的缓存机制 - Etag](#2514-基于文件-hash-值校验的缓存机制---etag)
+			* [2.5.1.3 基于客户端和服务端协商的缓存机制 - Last-modified and If-Modified-Since](#2513-基于客户端和服务端协商的缓存机制---last-modified-and-if-modified-since)
+			* [2.5.1.4 基于文件 hash 值校验的缓存机制 - Etag and If-None-Match](#2514-基于文件-hash-值校验的缓存机制---etag-and-if-none-match)
 		* [2.5.2 多级缓存策略](#252-多级缓存策略)
 
 * [3. 综合服务端的优化](#3-综合服务端的优化)
@@ -379,7 +379,7 @@ if (window.sessionStorage) {
 
 * private：私有（如浏览器）
 * public：公有（如 CDN）
-* max-age：指定缓存的最大有效时间（优先级高于 [Expires](#2512-expires)）
+* max-age：指定缓存的最大有效时间（优先级高于 [Expires](#2512-设置缓存过期时间---expires)）
 * s-maxage：指定缓存的最大有效时间（只能指定 public 的缓存设备（如 CDM）的缓存有效时间，优先级高于 max-age）
 * no-cache：浏览器向服务器发送请求判断浏览器缓存是否过期，并不是没有缓存
 * no-store：不使用缓存
@@ -393,7 +393,7 @@ if (window.sessionStorage) {
 
 * last-modified - response header（最后修改时间）
 * if-modified-since - request header（客户端所掌握的最后修改时间，服务端若放回 `Status Code:304`：表示浏览器缓存未过期，文件为最新版本，`Status Code:200`：表示缓存已过期，文件已被修改，并发送最新版文件及新的最后需改时间到客户端）
-* 需要与 [cache-control](#2511-cache-control) 共同使用
+* 需要与 [cache-control](#2511-缓存策略控制---cache-control) 共同使用
 
 > last-modified 的问题
 > * 部分服务端无法获取精确的修改时间，无法返回 last-modified
@@ -402,9 +402,9 @@ if (window.sessionStorage) {
 ##### 2.5.1.4 基于文件 hash 值校验的缓存机制 - [Etag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag) and [If-None-Match](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)
 
 * 文件内容的 hash 值
-* etag - response-header（客户端所掌握的文件 hash 值，优先级高于 if-modified-since）
+* etag - response-header（客户端所掌握的文件 hash 值，优先级高于 if-modified-since）
 * if-node-match - request-header（客户端所掌握的文件 hash 值，服务端若放回 `Status Code:304`：表示浏览器缓存未过期，文件为最新版本，`Status Code:200`：表示缓存已过期，文件已被修改，并发送最新版文件及新的文件 hash 值到客户端）
-* 需要与 [cache-control](#2511-cache-control) 共同使用
+* 需要与 [cache-control](#2511-缓存策略控制---cache-control) 共同使用
 
 > 成功避免 last-modified 的问题，并将校验精度提高到毫秒级
 
@@ -412,9 +412,9 @@ if (window.sessionStorage) {
 
 ![多级缓存策略](img/图-2.jpg)
 
-[多级缓存策略 - 流程图 PDF](code/5-浏览器缓存/static/catch-contorl生效情况.pdf)
+[多级缓存策略 - 流程图 PDF](code/5-浏览器缓存/static/缓存策略.pdf)
 
-![多级缓存策略 - 流程图](code/5-浏览器缓存/static/catch-contorl生效情况.svg)
+![多级缓存策略 - 流程图](code/5-浏览器缓存/static/缓存策略.svg)
 
 [多级缓存策略 - cache-control生效情况 PDF](code/5-浏览器缓存/static/catch-contorl生效情况.pdf)
 
