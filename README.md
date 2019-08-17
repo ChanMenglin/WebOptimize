@@ -303,6 +303,10 @@ document.cookie = 'token=token'
 document.cookie // token=token
 ```
 
+[一个完整支持unicode的cookie读取写入器](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie#一个小框架：一个完整支持unicode的cookie读取写入器)
+
+[前端 cookies 安全性](https://github.com/ChanMenglin/WebSecurity#3-前端-cookies-安全性)
+
 #### 2.4.2 [localStorage](https://developer.mozilla.org/zh-CN/docs/Web/API/Storage/localStorage)
 
 * HTML5 中用于浏览器本地缓存方案
@@ -342,7 +346,7 @@ if (window.localStorage) {
 // 由于兼容性问题，需要在使用 sessionStorage 前做一个判断
 if (window.sessionStorage) {
     // 写入 sessionStorage
-    sessionStorage.serItem('userName': 'jack');
+    sessionStorage.setItem('userName', 'jack');
 
     // 读取 sessionStorage
     sessionStorage.getItem('userName')
